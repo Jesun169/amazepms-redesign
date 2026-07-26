@@ -6,11 +6,13 @@ import About from '@/components/sections/About'
 import Stats from '@/components/sections/Stats'
 import CTA from '@/components/sections/CTA'
 import Contact from '@/components/sections/Contact'
+import ImageSlider from '@/components/sections/ImageSlider'
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <ImageSlider />
       <Features />
       <Stats />
       <Pricing />

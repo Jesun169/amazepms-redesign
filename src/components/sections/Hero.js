@@ -3,7 +3,17 @@
 import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
-import { FiArrowRight, FiPlay, FiCheck, FiStar, FiTrendingUp } from 'react-icons/fi'
+import {
+  FiArrowRight,
+  FiPlay,
+  FiCheck,
+  FiStar,
+  FiTrendingUp,
+  FiUsers,
+  FiBarChart2,
+  FiLayers,
+} from 'react-icons/fi'
+
 import AnimatedButton from '@/components/common/AnimatedButton'
 import ParticleBackground from '@/components/common/ParticleBackground'
 
@@ -13,34 +23,40 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+
+      // Title Animation
       const title = titleRef.current
+
       if (title) {
         const text = title.textContent
         title.textContent = ''
-        const words = text.split(' ')
 
-        words.forEach((word, wordIndex) => {
+        text.split(' ').forEach((word, wordIndex) => {
           const wordSpan = document.createElement('span')
+
           wordSpan.style.display = 'inline-block'
           wordSpan.style.marginRight = '0.3em'
           wordSpan.style.overflow = 'hidden'
 
-          const letters = word.split('')
-          letters.forEach((letter, letterIndex) => {
+          word.split('').forEach((letter, letterIndex) => {
             const span = document.createElement('span')
+
             span.textContent = letter
             span.style.display = 'inline-block'
-            span.style.opacity = '0'
-            span.style.transform = 'translateY(50px)'
-            span.style.transition = 'none'
+            span.style.opacity = 0
+            span.style.transform = 'translateY(70px)'
+
             wordSpan.appendChild(span)
 
             gsap.to(span, {
               opacity: 1,
               y: 0,
               duration: 0.8,
-              ease: 'power3.out',
-              delay: 0.5 + (wordIndex * 0.2) + (letterIndex * 0.03),
+              ease: 'power4.out',
+              delay:
+                0.5 +
+                wordIndex * 0.18 +
+                letterIndex * 0.03,
             })
           })
 
@@ -48,155 +64,368 @@ const Hero = () => {
         })
       }
 
-      gsap.to('.floating-element', {
-        y: 30,
-        duration: 2.5,
+      // Floating Cards
+      gsap.to('.floating-card', {
+        y: 18,
+        duration: 3,
         repeat: -1,
         yoyo: true,
         ease: 'power1.inOut',
         stagger: 0.3,
       })
 
-      gsap.fromTo('.hero-badge',
-        { opacity: 0, y: 20, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.2 }
+      // Hero Badge
+      gsap.fromTo(
+        '.hero-badge',
+        {
+          opacity: 0,
+          y: 20,
+          scale: 0.9,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.7,
+        }
       )
 
-      gsap.fromTo('.hero-description',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.8 }
+      // Description
+      gsap.fromTo(
+        '.hero-description',
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.6,
+        }
       )
 
-      gsap.fromTo('.hero-cta',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 1 }
+      // Buttons
+      gsap.fromTo(
+        '.hero-buttons',
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.8,
+        }
       )
 
-      gsap.fromTo('.hero-trust',
-        { opacity: 0 },
-        { opacity: 1, duration: 0.8, delay: 1.3 }
+      // Stats
+      gsap.fromTo(
+        '.hero-stats',
+        {
+          opacity: 0,
+          y: 40,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 1,
+        }
       )
 
-      gsap.fromTo('.hero-glow-1',
-        { scale: 0.8, opacity: 0.3 },
-        { scale: 1.2, opacity: 0.8, duration: 3, repeat: -1, yoyo: true, ease: 'power1.inOut' }
+      // Trusted
+      gsap.fromTo(
+        '.hero-trusted',
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 1,
+          duration: 0.8,
+          delay: 1.2,
+        }
       )
 
-      gsap.fromTo('.hero-glow-2',
-        { scale: 0.8, opacity: 0.2 },
-        { scale: 1.3, opacity: 0.7, duration: 4, repeat: -1, yoyo: true, ease: 'power1.inOut', delay: 1 }
-      )
+      // Background Glow
+      gsap.to('.hero-glow', {
+        scale: 1.25,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power1.inOut',
+      })
+
     }, heroRef)
 
     return () => ctx.revert()
+
   }, [])
-
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-dark-100 via-dark-200 to-dark-300" />
-      <div className="absolute inset-0 bg-grid-pattern opacity-30" />
-
-      <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-primary-500/20 blur-3xl hero-glow-1" />
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 rounded-full bg-secondary-500/20 blur-3xl hero-glow-2" />
+    <section
+      ref={heroRef}
+      className="relative min-h-screen overflow-hidden flex items-center justify-center pt-36 pb-24"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-black" />
 
       <ParticleBackground />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Grid */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-20" />
+
+      {/* Glow */}
+      <div className="hero-glow absolute -top-44 left-1/2 -translate-x-1/2 w-[750px] h-[750px] rounded-full bg-primary-500/20 blur-[180px]" />
+
+      {/* Floating Card Left */}
+      <motion.div
+        animate={{ y: [0, -15, 0] }}
+        transition={{ repeat: Infinity, duration: 4 }}
+        className="floating-card hidden xl:flex absolute left-12 top-44 z-20
+        rounded-3xl bg-white/5 border border-white/10
+        backdrop-blur-2xl px-6 py-5 shadow-2xl"
+      >
+        <div className="flex items-center gap-4">
+
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+            <FiTrendingUp className="text-white text-2xl" />
+          </div>
+
+          <div>
+            <h3 className="font-bold text-xl text-white">
+              +24%
+            </h3>
+
+            <p className="text-sm text-gray-400">
+              Productivity Boost
+            </p>
+          </div>
+
+        </div>
+      </motion.div>
+
+      {/* Floating Card Right */}
+      <motion.div
+        animate={{ y: [0, 18, 0] }}
+        transition={{ repeat: Infinity, duration: 5 }}
+        className="floating-card hidden xl:flex absolute right-12 top-60 z-20
+        rounded-3xl bg-white/5 border border-white/10
+        backdrop-blur-2xl px-6 py-5 shadow-2xl"
+      >
+        <div className="flex items-center gap-4">
+
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500 to-pink-500 flex items-center justify-center">
+            <FiUsers className="text-white text-2xl" />
+          </div>
+
+          <div>
+
+            <h3 className="font-bold text-xl text-white">
+              10K+
+            </h3>
+
+            <p className="text-sm text-gray-400">
+              Happy Teams
+            </p>
+
+          </div>
+
+        </div>
+      </motion.div>
+
+      <div className="relative z-10 container mx-auto px-6">
+
         <div className="max-w-5xl mx-auto text-center">
+
+          {/* Badge */}
+
           <motion.div
-            className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-8"
+            className="hero-badge inline-flex items-center gap-3
+            rounded-full border border-primary-500/30
+            bg-primary-500/10 backdrop-blur-xl
+            px-6 py-3 mb-8"
           >
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500" />
+
+            <span className="relative flex h-3 w-3">
+
+              <span className="absolute inline-flex h-full w-full rounded-full bg-primary-400 animate-ping"></span>
+
+              <span className="relative h-3 w-3 rounded-full bg-primary-500"></span>
+
             </span>
-            <span className="text-sm text-primary-400 font-medium">Now available for early access</span>
+
+            <span className="text-primary-300 font-medium">
+              Trusted by 10,000+ Teams Worldwide
+            </span>
+
           </motion.div>
 
-          <h1 ref={titleRef} className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight text-center">
-            Transform Your Project Management
+          {/* Title */}
+
+          <h1
+            ref={titleRef}
+            className="text-5xl md:text-7xl xl:text-8xl font-black leading-[1.05]"
+          >
+            Build Amazing
+            <br />
+
+            <span className="bg-gradient-to-r from-primary-400 via-cyan-300 to-secondary-400 bg-clip-text text-transparent">
+              Projects Faster
+            </span>
+
           </h1>
 
-          <p className="hero-description text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
-            The most intuitive and powerful project management software for modern teams.
-            Plan, track, and deliver amazing work together.
+          {/* Description */}
+
+          <p className="hero-description mt-8 max-w-3xl mx-auto text-lg md:text-2xl leading-relaxed text-gray-300">
+
+            One platform for planning, collaboration,
+            reporting and team productivity.
+
+            Manage everything beautifully with
+            lightning-fast performance.
+
           </p>
 
-          <div className="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
+          {/* Buttons */}
+
+          <div className="hero-buttons mt-12 flex flex-col sm:flex-row justify-center gap-5">
+
             <AnimatedButton
               variant="gradient"
               size="lg"
-              className="group px-8 py-4 text-lg"
+              icon={FiArrowRight}
+              iconPosition="right"
+              className="shadow-2xl shadow-primary-500/40"
             >
-              Get Started Free
-              <span className="inline-block transition-transform duration-300 group-hover:translate-x-1 ml-2">
-                <FiArrowRight className="w-5 h-5 inline-block" />
-              </span>
+              Start Free Trial
             </AnimatedButton>
+
             <AnimatedButton
               variant="outline"
               size="lg"
-              className="px-8 py-4 text-lg"
               icon={FiPlay}
+              className="border-white/20 bg-white/5 backdrop-blur-xl"
             >
               Watch Demo
             </AnimatedButton>
+
+          </div>
+          {/* Premium Stats */}
+
+          <div className="hero-stats mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8"
+            >
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500/20">
+                <FiUsers className="text-3xl text-blue-400" />
+              </div>
+
+              <h3 className="text-5xl font-black">10K+</h3>
+
+              <p className="mt-2 text-gray-400">
+                Teams Worldwide
+              </p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8"
+            >
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-green-500/20">
+                <FiTrendingUp className="text-3xl text-green-400" />
+              </div>
+
+              <h3 className="text-5xl font-black">
+                +24%
+              </h3>
+
+              <p className="mt-2 text-gray-400">
+                Productivity Increase
+              </p>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-2xl p-8"
+            >
+              <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-yellow-500/20">
+                <FiStar className="text-3xl text-yellow-400 fill-current" />
+              </div>
+
+              <h3 className="text-5xl font-black">
+                4.9★
+              </h3>
+
+              <p className="mt-2 text-gray-400">
+                Customer Rating
+              </p>
+            </motion.div>
+
           </div>
 
-          <div className="hero-trust mt-12 flex flex-wrap items-center justify-center gap-8">
-            <div className="flex items-center gap-2 text-sm text-gray-400">
-              <FiCheck className="text-primary-500" />
+          {/* Trust Badges */}
+
+          <div className="hero-trusted mt-20 flex flex-wrap items-center justify-center gap-8">
+
+            <div className="flex items-center gap-2 text-gray-400">
+              <FiCheck className="text-green-400" />
               No credit card required
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-400">
-              <FiCheck className="text-primary-500" />
+
+            <div className="flex items-center gap-2 text-gray-400">
+              <FiCheck className="text-green-400" />
               14-day free trial
             </div>
-            <div className="flex items-center gap-2 text-sm text-gray-400">
-              <FiCheck className="text-primary-500" />
+
+            <div className="flex items-center gap-2 text-gray-400">
+              <FiCheck className="text-green-400" />
               Cancel anytime
             </div>
+
           </div>
 
-          <div className="hero-trust mt-8 flex items-center justify-center gap-8">
-            <div className="flex items-center gap-2">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center text-xs font-bold border-2 border-dark-100">
-                    {String.fromCharCode(64 + i)}
-                  </div>
-                ))}
-              </div>
-              <span className="text-sm text-gray-400">Joined by 10,000+ teams</span>
-            </div>
-            <div className="flex items-center gap-1 text-sm text-gray-400">
-              <FiStar className="text-yellow-400 fill-current" />
-              <FiStar className="text-yellow-400 fill-current" />
-              <FiStar className="text-yellow-400 fill-current" />
-              <FiStar className="text-yellow-400 fill-current" />
-              <FiStar className="text-yellow-400 fill-current" />
-              <span className="ml-1">4.9/5</span>
-            </div>
-          </div>
         </div>
+
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
+      {/* Scroll Indicator */}
+
+      <div className="absolute  bottom-5 left-1/2 z-20 -translate-x-1/2">
+
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2"
+          animate={{ y: [0, 8, 0] }}
+          transition={{
+            repeat: Infinity,
+            duration: 2,
+          }}
+          className="flex flex-col items-center"
         >
-          <span className="text-xs text-gray-400 uppercase tracking-wider">Scroll</span>
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2">
+
+          <span className="mb-3 text-xs uppercase tracking-[0.35em] text-gray-500">
+            Scroll
+          </span>
+
+          <div className="flex h-12 w-7 justify-center rounded-full border border-white/20 p-2">
+
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-2 rounded-full bg-white/60"
+              animate={{ y: [0, 12, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 1.5,
+              }}
+              className="h-3 w-1.5 rounded-full bg-primary-400"
             />
+
           </div>
+
         </motion.div>
+
       </div>
+
     </section>
   )
 }
