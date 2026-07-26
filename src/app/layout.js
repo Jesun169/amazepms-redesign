@@ -4,6 +4,7 @@ import { Providers } from './providers'
 import Navigation from '@/components/layout/Navigation'
 import Footer from '@/components/layout/Footer'
 import SmoothScroll from '@/components/common/SmoothScroll'
+import { siteConfig } from '@/lib/config/siteConfig'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,51 +21,37 @@ const poppins = Poppins({
 
 export const metadata = {
   title: {
-    default: 'AmazePMS - Premium Project Management Software',
-    template: '%s | AmazePMS',
+    default: siteConfig.title,
+    template: `%s | ${siteConfig.title}`,
   },
-  description: 'Transform your project management with AmazePMS. The most intuitive and powerful project management software for modern teams.',
-  keywords: 'project management, team collaboration, task tracking, agile, scrum',
-  authors: [{ name: 'AmazePMS Team' }],
+  description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: siteConfig.authors,
   openGraph: {
-    title: 'AmazePMS - Premium Project Management Software',
-    description: 'Transform your project management with AmazePMS',
-    url: 'https://amazepms.com',
-    siteName: 'AmazePMS',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'AmazePMS',
-      },
-    ],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.title,
+    images: siteConfig.ogImages,
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AmazePMS - Premium Project Management Software',
-    description: 'Transform your project management with AmazePMS',
-    images: ['/twitter-image.jpg'],
+    title: siteConfig.title,
+    description: siteConfig.description,
+    images: siteConfig.twitterImages,
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
   },
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-dark-100 text-white overflow-x-hidden">
+    <html lang="en" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
+      <body className="font-sans antialiased bg-background text-foreground overflow-x-hidden">
         <Providers>
           <SmoothScroll>
             <Navigation />

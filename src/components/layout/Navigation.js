@@ -49,8 +49,8 @@ const Navigation = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-            ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
-            : 'bg-transparent'
+          ? 'bg-black/40 backdrop-blur-2xl border-b border-white/10 shadow-2xl'
+          : 'bg-transparent'
           }`}
       >
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-primary-500/5 via-transparent to-secondary-500/5 blur-3xl" />
@@ -134,7 +134,8 @@ const Navigation = () => {
 
             <div className="hidden lg:flex items-center gap-4">
 
-              <button
+              {/* Theme Toggle Button - HIDDEN */}
+              {/* <button
                 onClick={toggleTheme}
                 className="
                 flex
@@ -158,7 +159,7 @@ const Navigation = () => {
                 ) : (
                   <FiMoon className="text-white w-5 h-5" />
                 )}
-              </button>
+              </button> */}
 
               <Link
                 href="/login"
@@ -374,7 +375,8 @@ const Navigation = () => {
                 <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              <button
+              {/* Theme Toggle Button - HIDDEN in mobile menu */}
+              {/* <button
                 onClick={toggleTheme}
                 className="
                   flex
@@ -406,7 +408,7 @@ const Navigation = () => {
                     Dark Mode
                   </>
                 )}
-              </button>
+              </button> */}
             </div>
           </div>
         </div>
