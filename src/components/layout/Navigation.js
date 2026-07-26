@@ -134,8 +134,7 @@ const Navigation = () => {
 
             <div className="hidden lg:flex items-center gap-4">
 
-              {/* Theme Toggle Button - HIDDEN */}
-              {/* <button
+              <button
                 onClick={toggleTheme}
                 className="
                 flex
@@ -159,7 +158,7 @@ const Navigation = () => {
                 ) : (
                   <FiMoon className="text-white w-5 h-5" />
                 )}
-              </button> */}
+              </button>
 
               <Link
                 href="/login"
@@ -375,8 +374,7 @@ const Navigation = () => {
                 <FiArrowRight className="transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
-              {/* Theme Toggle Button - HIDDEN in mobile menu */}
-              {/* <button
+              <button
                 onClick={toggleTheme}
                 className="
                   flex
@@ -408,7 +406,7 @@ const Navigation = () => {
                     Dark Mode
                   </>
                 )}
-              </button> */}
+              </button>
             </div>
           </div>
         </div>

@@ -51,19 +51,19 @@ const Contact = () => {
         {
             icon: FiMail,
             label: 'Email',
-            value: 'hello@amazepms.com',
-            href: 'mailto:hello@amazepms.com',
+            value: 'Info@amazepms.com',
+            href: 'mailto:Info@amazepms.com',
         },
         {
             icon: FiPhone,
             label: 'Phone',
-            value: '+1 (555) 123-4567',
-            href: 'tel:+15551234567',
+            value: '+91 9100694137',
+            href: 'tel:+91 9100694137',
         },
         {
             icon: FiMapPin,
             label: 'Location',
-            value: 'San Francisco, CA',
+            value: '4th floor, High Mark Chambers, Khajaguda X road, Cyberabad, Hyderabad-500008',
             href: '#',
         },
     ]
