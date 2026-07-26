@@ -11,32 +11,37 @@ import {
   FiMail,
   FiMapPin,
   FiPhone,
-  FiArrowUp
+  FiArrowUp,
+  FiUsers,
+  FiLayers,
+  FiCreditCard,
+  FiFileText,
+  FiInfo
 } from 'react-icons/fi'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   const footerLinks = {
-    Product: [
-      { name: 'Features', href: '/features' },
-      { name: 'Pricing', href: '/pricing' },
-      { name: 'Integrations', href: '#' },
-      { name: 'Changelog', href: '#' },
+    'Quick Links': [
+      { name: 'Features', href: '/features', icon: FiLayers },
+      { name: 'Clients', href: '/clients', icon: FiUsers },
+      { name: 'Pricing', href: '/pricing', icon: FiCreditCard },
+      { name: 'About', href: '/about', icon: FiInfo },
     ],
-    Company: [
-      { name: 'About', href: '/about' },
-      { name: 'Careers', href: '#' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Press', href: '#' },
-    ],
-    Resources: [
+    'Resources': [
       { name: 'Documentation', href: '#' },
       { name: 'Help Center', href: '#' },
       { name: 'Community', href: '#' },
-      { name: 'Status', href: '#' },
+      { name: 'Blog', href: '/blog' },
     ],
-    Legal: [
+    'Company': [
+      { name: 'About Us', href: '/about' },
+      { name: 'Careers', href: '#' },
+      { name: 'Press', href: '#' },
+      { name: 'Contact', href: '/contact' },
+    ],
+    'Legal': [
       { name: 'Privacy Policy', href: '#' },
       { name: 'Terms of Service', href: '#' },
       { name: 'Security', href: '#' },
@@ -45,10 +50,10 @@ const Footer = () => {
   }
 
   const socialLinks = [
-    { icon: FiTwitter, href: '#', label: 'Twitter', color: '#1DA1F2' },
-    { icon: FiGithub, href: '#', label: 'GitHub', color: '#6e5494' },
     { icon: FiLinkedin, href: '#', label: 'LinkedIn', color: '#0A66C2' },
+    { icon: FiTwitter, href: '#', label: 'Twitter', color: '#1DA1F2' },
     { icon: FiYoutube, href: '#', label: 'YouTube', color: '#FF0000' },
+    { icon: FiGithub, href: '#', label: 'GitHub', color: '#6e5494' },
   ]
 
   const scrollToTop = () => {
@@ -61,6 +66,7 @@ const Footer = () => {
 
       <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12">
+          {/* Brand Column */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6 group">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500 flex items-center justify-center transition-transform group-hover:scale-110">
@@ -71,7 +77,8 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-gray-400 mb-6 max-w-sm leading-relaxed">
-              Transform your project management with the most intuitive and powerful software for modern teams.
+              Amaze PMS Pvt Ltd is a leading Property Management division of ACTION GROUP,
+              providing comprehensive integrated Property Management Solutions across India.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -91,6 +98,7 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* Link Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
               <h3 className="text-white font-semibold mb-4 text-lg">{category}</h3>
@@ -111,21 +119,23 @@ const Footer = () => {
           ))}
         </div>
 
+        {/* Contact Information */}
         <div className="mt-12 pt-8 border-t border-white/5 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex items-center gap-3 text-gray-400 group hover:text-white transition-colors">
-            <FiMail className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform" />
-            <span>hello@amazepms.com</span>
+            <FiMail className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span>Info@amazepms.com</span>
           </div>
           <div className="flex items-center gap-3 text-gray-400 group hover:text-white transition-colors">
-            <FiPhone className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform" />
-            <span>+1 (555) 123-4567</span>
+            <FiPhone className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span>+91 9100694137</span>
           </div>
           <div className="flex items-center gap-3 text-gray-400 group hover:text-white transition-colors">
-            <FiMapPin className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform" />
-            <span>San Francisco, CA</span>
+            <FiMapPin className="w-5 h-5 text-primary-500 group-hover:scale-110 transition-transform flex-shrink-0" />
+            <span className="text-sm">4th floor, High Mark Chambers, Khajaguda X road, Cyberabad, Hyderabad-500008</span>
           </div>
         </div>
 
+        {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-400">
             © {currentYear} AmazePMS. All rights reserved.
@@ -144,11 +154,13 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
         className="absolute bottom-8 right-8 p-3 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 transition-all"
         aria-label="Scroll to top"
       >

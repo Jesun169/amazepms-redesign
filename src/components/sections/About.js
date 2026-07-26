@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { FiTarget, FiHeart, FiZap } from 'react-icons/fi'
 import GlassCard from '@/components/common/GlassCard'
 import ScrollReveal from '@/components/common/ScrollReveal'
@@ -11,19 +12,19 @@ const About = () => {
             icon: FiTarget,
             title: 'Mission-Driven',
             description:
-                "We're on a mission to make project management accessible and effective for every team.",
+                "We're on a mission to make property management accessible and effective for every business.",
         },
         {
             icon: FiHeart,
             title: 'User-Centric',
             description:
-                "Every feature we build is designed with our users' needs and feedback in mind.",
+                "Every service we provide is designed with our clients' needs and feedback in mind.",
         },
         {
             icon: FiZap,
             title: 'Innovation First',
             description:
-                'We constantly push boundaries to bring you the latest in project management technology.',
+                'We constantly push boundaries to bring you the latest in property management technology and services.',
         },
     ]
 
@@ -34,6 +35,7 @@ const About = () => {
 
             <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    {/* Left Column - Content */}
                     <div>
                         <ScrollReveal>
                             <span className="inline-block px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4">
@@ -44,23 +46,13 @@ const About = () => {
                         <ScrollReveal delay={0.1}>
                             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
                                 Building the Future of <br />
-                                <span className="gradient-text">Project Management</span>
+                                <span className="gradient-text">Property Management</span>
                             </h2>
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.2}>
                             <p className="text-gray-300 text-lg mb-6 leading-relaxed">
-                                At AmazePMS, we believe that great teams deserve great tools.
-                                That's why we've built the most intuitive, powerful, and
-                                collaborative project management platform on the market.
-                            </p>
-                        </ScrollReveal>
-
-                        <ScrollReveal delay={0.3}>
-                            <p className="text-gray-400 leading-relaxed">
-                                Founded in 2023, our team of passionate developers, designers,
-                                and project management experts came together with a single
-                                vision: to transform how teams work together.
+                                Amaze PMS Pvt Ltd (AMAZE) is a Property Management division of ACTION GROUP of Companies founded in the year 2001 by Mr. Subhani Abdul a veteran from the Indian Navy, a Certified Security Practitioner, and a renowned name in the Service Industry. Amaze has its Head Quarters in Cyberabad, Telangana - INDIA, providing Property Management Solutions PAN INDIA, partnering with leading clientele with 15000 + strong strength of professionals. We specialize in offering comprehensive integrated Property Management Services such as Housekeeping, MEP (Mechanical, Electrical, Plumbing), Security, Pest Control, Gardening, STP & WTP, Parking, Swimming Pool Maintenance, office support services, deep cleaning services etc all these services are inhouse.
                             </p>
                         </ScrollReveal>
 
@@ -86,6 +78,7 @@ const About = () => {
                         </div>
                     </div>
 
+                    {/* Right Column - Image */}
                     <div>
                         <ScrollReveal direction="right">
                             <div className="relative">
@@ -96,12 +89,29 @@ const About = () => {
                                     <div className="aspect-video rounded-xl bg-gradient-to-br from-primary-500/20 to-secondary-500/20 flex items-center justify-center relative overflow-hidden">
                                         <div className="absolute inset-0 bg-grid-pattern opacity-20" />
 
-                                        <div className="text-center z-10">
-                                            <div className="text-6xl mb-4">🚀</div>
-                                            <h3 className="text-2xl font-bold">AmazePMS Team</h3>
-                                            <p className="text-gray-400">
-                                                Building the future together
-                                            </p>
+                                        {/* ===== IMAGE DISPLAY ===== */}
+                                        <div className="relative w-full h-full">
+                                            <Image
+                                                src="/images/banner/about1.png"
+                                                alt="AmazePMS Team"
+                                                fill
+                                                className="object-cover"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                priority
+                                                onError={(e) => {
+                                                    // Fallback if image fails to load
+                                                    e.target.style.display = 'none'
+                                                }}
+                                            />
+                                            {/* Overlay for better text visibility */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-dark-100/70 via-transparent to-transparent" />
+                                        </div>
+
+                                        {/* Text overlay */}
+                                        <div className="absolute bottom-6 left-6 z-10 text-left">
+                                            <div className="text-4xl mb-2">🏢</div>
+                                            <h3 className="text-2xl font-bold text-white">AmazePMS Team</h3>
+                                            <p className="text-gray-300 text-sm">Building the future together</p>
                                         </div>
                                     </div>
                                 </GlassCard>

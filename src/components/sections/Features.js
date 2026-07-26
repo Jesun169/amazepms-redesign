@@ -24,7 +24,7 @@ const Features = () => {
   const features = [
     {
       icon: FiLayers,
-      title: 'Project Planning',
+      title: 'Property Planning',
       description: 'Create and manage projects with ease using our intuitive planning tools and Gantt charts.',
       color: 'from-blue-500 to-cyan-500',
     },
@@ -110,7 +110,7 @@ const Features = () => {
           <ScrollReveal delay={0.1}>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
               Everything You Need to <br />
-              <span className="gradient-text">Manage Projects</span>
+              <span className="gradient-text">Manage Property</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.2}>

@@ -1,14 +1,14 @@
 'use client'
 
 import React, { useRef, useState, useEffect } from 'react'
-import { motion, AnimatePresence, useMotionValue } from 'framer-motion'
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import {
     FiChevronLeft,
     FiChevronRight,
     FiPlay,
     FiPause,
-    FiMaximize2,
+    FiFullscreen,
     FiZoomIn,
     FiHeart,
     FiShare2,
@@ -18,34 +18,35 @@ import {
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa'
 import ScrollReveal from '@/components/common/ScrollReveal'
 
-const ImageSlider = () => {
+const PremiumImageSlider = () => {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isPlaying, setIsPlaying] = useState(true)
     const [direction, setDirection] = useState(0)
     const [isHovered, setIsHovered] = useState(false)
     const [progress, setProgress] = useState(0)
     const [isFullscreen, setIsFullscreen] = useState(false)
-    const [imagesLoaded, setImagesLoaded] = useState({})
     const slideInterval = useRef(null)
     const containerRef = useRef(null)
     const x = useMotionValue(0)
 
-    // ===== SLIDES WITH CORRECT PATHS =====
     const slides = [
         {
             id: 1,
-            title: 'Amaze Property Management Solutions Pvt Ltd',
-            subtitle: 'A one stop solutions for all your property management needs.',
-            image: '/images/banner/buildingbanner2.png',
+            title: 'Dashboard Overview',
+            subtitle: 'Complete project visibility at a glance',
+            description: 'Get real-time insights into your projects with our intuitive dashboard. Track progress, manage tasks, and monitor team performance all in one place.',
+            image: '/images/slider/dashboard.jpg',
+            color: '#4a8cff',
             gradient: 'from-blue-600 via-blue-500 to-purple-600',
             features: ['Real-time Updates', 'Custom Widgets', 'Data Visualization', 'Team Analytics'],
             stats: { views: '12.4K', likes: '892', shares: '234' },
         },
         {
             id: 2,
-            title: 'Technical Services',
-            subtitle: 'Professional Maintenance & Technical Support',
-            image: '/images/banner/banner4.jpg',
+            title: 'Team Collaboration',
+            subtitle: 'Work together seamlessly',
+            description: 'Empower your team with real-time collaboration tools. Share files, communicate instantly, and stay connected regardless of location.',
+            image: '/images/slider/collaboration.jpg',
             color: '#8b5cf6',
             gradient: 'from-purple-600 via-purple-500 to-pink-600',
             features: ['Instant Messaging', 'File Sharing', 'Video Calls', 'Team Spaces'],
@@ -53,9 +54,10 @@ const ImageSlider = () => {
         },
         {
             id: 3,
-            title: 'Landscaping Services',
-            subtitle: 'Expert Landscaping Tailored to Your Property',
-            image: '/images/banner/banner5.jpg',
+            title: 'Analytics & Reports',
+            subtitle: 'Data-driven decisions',
+            description: 'Make informed decisions with advanced analytics. Track KPIs, generate custom reports, and visualize your data with interactive charts.',
+            image: '/images/slider/analytics.jpg',
             color: '#f59e0b',
             gradient: 'from-amber-600 via-amber-500 to-orange-600',
             features: ['Custom Reports', 'KPI Tracking', 'Data Export', 'Interactive Charts'],
@@ -63,9 +65,10 @@ const ImageSlider = () => {
         },
         {
             id: 4,
-            title: 'Parking Management',
-            subtitle: 'Smart Parking Management for Residential & Commercial Properties',
-            image: '/images/banner/Parking-Management-System.jpg',
+            title: 'Task Management',
+            subtitle: 'Stay organized and productive',
+            description: 'Streamline your workflow with intelligent task management. Prioritize work, set deadlines, and track progress with ease.',
+            image: '/images/slider/tasks.jpg',
             color: '#10b981',
             gradient: 'from-emerald-600 via-emerald-500 to-teal-600',
             features: ['Priority Sorting', 'Deadline Tracking', 'Progress Monitoring', 'Task Templates'],
@@ -73,9 +76,10 @@ const ImageSlider = () => {
         },
         {
             id: 5,
-            title: 'Physical Security',
-            subtitle: 'Trained Security Personnel for Every Environment',
-            image: '/images/banner/physicalsecuritynew.jpg',
+            title: 'Mobile Access',
+            subtitle: 'Work from anywhere',
+            description: 'Access your projects anytime, anywhere with our fully responsive mobile platform. Stay productive on the go with offline mode and push notifications.',
+            image: '/images/slider/mobile.jpg',
             color: '#ef4444',
             gradient: 'from-red-600 via-red-500 to-rose-600',
             features: ['Responsive Design', 'Offline Mode', 'Push Notifications', 'Mobile Sync'],
@@ -125,10 +129,6 @@ const ImageSlider = () => {
         }
     }
 
-    const handleImageLoad = (id) => {
-        setImagesLoaded(prev => ({ ...prev, [id]: true }))
-    }
-
     const variants = {
         enter: (direction) => ({
             x: direction > 0 ? '100%' : '-100%',
@@ -163,6 +163,7 @@ const ImageSlider = () => {
             <div className="absolute inset-0 bg-grid-pattern opacity-10" />
             <div className="absolute inset-0 bg-dot-pattern opacity-20" />
 
+            {/* Animated gradient orbs */}
             <div className="absolute top-20 left-20 w-64 h-64 bg-primary-500/20 rounded-full blur-3xl animate-float" />
             <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
 
@@ -191,6 +192,7 @@ const ImageSlider = () => {
 
                 <div className="max-w-6xl mx-auto relative" ref={containerRef}>
                     <div className="relative rounded-3xl overflow-hidden glass p-3 md:p-4 border border-white/10 shadow-2xl shadow-primary-500/5">
+                        {/* Main Slider */}
                         <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-dark-300">
                             <AnimatePresence custom={direction} mode="wait">
                                 <motion.div
@@ -203,30 +205,26 @@ const ImageSlider = () => {
                                     className="absolute inset-0"
                                     style={{ perspective: '1200px' }}
                                 >
+                                    {/* Background gradient */}
                                     <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentIndex].gradient} opacity-30`} />
 
                                     <div className="absolute inset-0 bg-gradient-to-t from-dark-100 via-transparent to-dark-100/50 z-10" />
 
-                                    {/* ===== IMAGE DISPLAY ===== */}
-                                    <div className="absolute inset-0">
-                                        <Image
-                                            src={slides[currentIndex].image}
-                                            alt={slides[currentIndex].title}
-                                            fill
-                                            className="object-cover"
-                                            priority={currentIndex === 0}
-                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                                            onError={(e) => {
-                                                console.error('Image failed to load:', slides[currentIndex].image)
-                                                e.target.style.display = 'none'
-                                            }}
-                                            onLoadingComplete={() => handleImageLoad(slides[currentIndex].id)}
-                                        />
-                                    </div>
-
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="relative w-full h-full flex items-center justify-center p-6 md:p-12">
                                             <div className="text-center z-20 max-w-3xl">
+                                                <motion.div
+                                                    initial={{ scale: 0, rotate: -180, opacity: 0 }}
+                                                    animate={{ scale: 1, rotate: 0, opacity: 1 }}
+                                                    transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                                                    className="text-7xl md:text-8xl mb-6"
+                                                >
+                                                    {currentIndex === 0 && '📊'}
+                                                    {currentIndex === 1 && '👥'}
+                                                    {currentIndex === 2 && '📈'}
+                                                    {currentIndex === 3 && '✅'}
+                                                    {currentIndex === 4 && '📱'}
+                                                </motion.div>
 
                                                 <motion.div
                                                     initial={{ y: 30, opacity: 0 }}
@@ -281,6 +279,7 @@ const ImageSlider = () => {
                                                     ))}
                                                 </motion.div>
 
+                                                {/* Stats */}
                                                 <motion.div
                                                     initial={{ y: 30, opacity: 0 }}
                                                     animate={{ y: 0, opacity: 1 }}
@@ -296,6 +295,7 @@ const ImageSlider = () => {
                                                 </motion.div>
                                             </div>
 
+                                            {/* Floating decorative elements */}
                                             <div className="absolute top-10 right-10 w-20 h-20 rounded-full bg-primary-500/20 floating-element" />
                                             <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full bg-secondary-500/20 floating-element" style={{ animationDelay: '1s' }} />
                                             <div className="absolute top-1/2 left-20 w-16 h-16 rounded-full bg-accent-500/20 floating-element" style={{ animationDelay: '0.5s' }} />
@@ -304,6 +304,7 @@ const ImageSlider = () => {
                                 </motion.div>
                             </AnimatePresence>
 
+                            {/* Progress bar */}
                             <div className="absolute bottom-0 left-0 right-0 z-20 h-1 bg-white/10">
                                 <motion.div
                                     className="h-full bg-gradient-to-r from-primary-500 to-secondary-500"
@@ -312,13 +313,14 @@ const ImageSlider = () => {
                                 />
                             </div>
 
+                            {/* Top controls */}
                             <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
                                 <button
                                     onClick={toggleFullscreen}
                                     className="p-2 rounded-lg bg-black/30 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all hover:scale-110"
                                     aria-label="Fullscreen"
                                 >
-                                    <FiMaximize2 className="w-4 h-4 text-white/70" />
+                                    <FiFullscreen className="w-4 h-4 text-white/70" />
                                 </button>
                                 <button
                                     className="p-2 rounded-lg bg-black/30 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all hover:scale-110"
@@ -328,10 +330,12 @@ const ImageSlider = () => {
                                 </button>
                             </div>
 
+                            {/* Slide counter */}
                             <div className="absolute top-4 right-4 z-20 px-3 py-1 rounded-lg bg-black/30 backdrop-blur-sm text-xs text-white/70">
                                 {String(currentIndex + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
                             </div>
 
+                            {/* Navigation arrows */}
                             <button
                                 onClick={handlePrevious}
                                 className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-black/30 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all hover:scale-110 group"
@@ -349,6 +353,7 @@ const ImageSlider = () => {
                             </button>
                         </div>
 
+                        {/* Bottom Controls */}
                         <div className="flex items-center justify-between mt-4 px-2">
                             <div className="flex items-center gap-2">
                                 <button
@@ -393,6 +398,7 @@ const ImageSlider = () => {
                             </div>
                         </div>
 
+                        {/* Thumbnails */}
                         <div className="flex justify-center gap-2 mt-4 overflow-x-auto pb-2">
                             {slides.map((slide, index) => (
                                 <button
@@ -425,4 +431,4 @@ const ImageSlider = () => {
     )
 }
 
-export default ImageSlider
+export default PremiumImageSlider

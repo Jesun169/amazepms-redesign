@@ -1,4 +1,5 @@
 import Hero from '@/components/sections/Hero'
+import PremiumImageSlider from '@/components/sections/PremiumImageSlider'
 import Features from '@/components/sections/Features'
 import Pricing from '@/components/sections/Pricing'
 import Testimonials from '@/components/sections/Testimonials'

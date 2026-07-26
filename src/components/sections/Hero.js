@@ -373,7 +373,7 @@ const Hero = () => {
 
             <div className="flex items-center gap-2 text-gray-400">
               <FiCheck className="text-green-400" />
-              No credit card required
+              No credit card requiredd
             </div>
 
             <div className="flex items-center gap-2 text-gray-400">
